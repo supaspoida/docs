@@ -17,7 +17,7 @@ export const meta = {
   authors: ['msweeneydev'],
   url: '/guides/handling-node-request-body-with-micro',
   editUrl: 'pages/guides/handling-node-request-body-with-micro.mdx',
-  lastEdited: '2019-05-02T11:00:56.000Z'
+  lastEdited: '2019-05-02T16:20:42.000Z'
 }
 
 In this guide, we will show you how to parse a [Node.js request body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/), for use inside a [serverless function](/docs/v2/deployments/concepts/lambdas/), without requirinq a framework such as Express.
@@ -32,8 +32,8 @@ To illustrate the parsing of the request body, let's take the below function as 
 const { json } = require('micro')
 
 module.exports = async (req, res) => {
-  const { name } = await json(req)
-  res.end(`Hello ${name}, you just parsed the request body!`)
+  const body = await json(req)
+  res.end(`Hello ${body.name}, you just parsed the request body!`)
 }
 ```
 
@@ -45,7 +45,11 @@ module.exports = async (req, res) => {
   and <GenericLink href="https://github.com/zeit/micro">Micro</GenericLink>.
 </Caption>
 
-The key part here is line 3, for those used to working with Express, it should like similar to accessing `req.body`.
+The key part here is line 3, for those used to working with Express, it should be similar to accessing `req.body`.
+
+The `json(req)` function returns the request body in the JSON format, fully parsed and ready to work with.
+
+This is illustrated in the response, as we access the JSON object to use the `name` property that was sent in the initial request.
 
 ## Step 2: Sending the Request
 
@@ -65,7 +69,7 @@ To verify that the JSON is being parsed correctly, make a POST request using [cu
     Making a POST request using <GenericLink href="https://curl.haxx.se/">curl</GenericLink>.
 </Caption>
 
-You will receive a response like the following:
+The endpoint contains only the code shown in [step 1](#step-1:-setting-up-the-function) with nothing else added to it. You will receive a response like the following:
 
 <Code>Hello Reader, you just parsed the request body!</Code>
 <Caption>
