@@ -1,1 +1,1 @@
-export { default } from './introduction.mdx'
+export { default } from './getting-started.mdx'
