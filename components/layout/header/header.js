@@ -342,7 +342,8 @@ class Header extends Component {
             href="/docs"
             active={
               router.pathname.startsWith('/docs') &&
-              !router.pathname.startsWith('/docs/api')
+              !router.pathname.startsWith('/docs/api') &&
+              !router.pathname.startsWith('/docs/addons')
             }
             onClick={handleIndexClick}
           >
@@ -369,6 +370,13 @@ class Header extends Component {
           >
             Examples
           </NavigationItem>
+          <NavigationItem
+            href="/docs/addons"
+            active={router.pathname.startsWith('/docs/addons')}
+            onClick={handleIndexClick}
+          >
+            Addons
+          </NavigationItem>
           <span className="desktop_search">{this.renderSearch()}</span>
         </Navigation>
 
@@ -377,14 +385,20 @@ class Header extends Component {
             <Fragment>
               {!user ? (
                 <Fragment>
-                  <NavigationItem className="chat" href="https://zeit.co/support">
+                  <NavigationItem
+                    className="chat"
+                    href="https://zeit.co/support"
+                  >
                     Support
                   </NavigationItem>
                   <NavigationItem href="/login">Login</NavigationItem>
                 </Fragment>
               ) : (
                 <Fragment>
-                  <NavigationItem className="chat" href="https://zeit.co/support">
+                  <NavigationItem
+                    className="chat"
+                    href="https://zeit.co/support"
+                  >
                     Support
                   </NavigationItem>
                   <Menu
