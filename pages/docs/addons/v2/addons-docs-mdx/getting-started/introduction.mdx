@@ -1,15 +1,57 @@
-import Now from '~/components/text/now'
-
 export const meta = {
   editUrl:
     'pages/docs/addons/v2/addons-docs-mdx/getting-started/introduction.mdx',
-  lastEdited: '2019-05-04T21:37:01.000Z'
+  lastEdited: '2019-05-05T10:40:29.000Z'
 }
 
 ## Introduction
 
-ZEIT Addons give you the ability to extend the capabilities of ZEIT, making it easier for your customers to access your product in a setting they are already familiar with.
+Our main goal at ZEIT is to make it simple for developers to build apps and deploy them quickly. With this goal in mind, we provide a variety of products such as [Now](/now), [Domains](/domains) and the [GitHub](/docs/v2/integrations/now-for-github/)/[GitLab](/docs/v2/integrations/now-for-gitlab/) integrations to empower them to do so.
 
-By taking advantage of Addons you will be able to perform actions on behalf of users and provide integrations that bring your product together with the ZEIT platform in many different ways.
+Our customers want integrations with different databases, third party services and UI/UX needs. In our pursuit to make the lives of developers easier we've looked at several options and believe ZEIT Addons are the perfect way to do this.
 
-This documentation outlines the types of Addon you can create, recommended workflows and how to use the [ZEIT Component System](#component-system) for rapid development and seamless integration with the platform.
+### ZEIT Addons
+
+With **ZEIT Addons**, we introduce a way to extend the capabilities of ZEIT and to integrate with virtually any platform available. Here's just some the things you can do with **ZEIT addons**:
+
+- Add databases into deployments with just a few clicks.
+- Add custom UI elements in <https://zeit.co>
+- Enable complete access to our [API](/docs/api)
+- Easily configure third party services such as error tracking and performance monitoring.
+- Create mashup apps integrating multiple different services of your choosing
+- Add Login with ZEIT for your app
+- Access hardware and connect with external devices such Arduino, Philips Hue, etc.
+
+These are just a few of the possibilities afforded by ZEIT Addons, in reality, there is not limit to what you can create.
+
+### What's an Addon
+
+Before we start building our first Addon, let's find out what an Addon is:
+
+- It's a HTTP endpoint meaning you can write it with any language you like
+- You can run it locally or deploy anywhere
+- The HTTP endpoint receives a [ZEIT API](/docs/api) token among other information. (For the installed user or team)
+- Using our API, you can add project level environment variables and store some metadata related to the installation
+- You can return `JSX` as the HTTP response to build UI elements
+- You can interact with users via buttons and different input elements
+- It can also work as a standard OAuth2 app
+
+### What's a UiHook
+
+A **UiHook** is the name we use for the HTTP endpoint of an Addon. We use the name **UiHook** because it's similar to a Webhook, but based on user interfaces.
+
+- It's another name for a Wehbook
+- It's the name given for the HTTP endpoint of the ZEIT Addon
+- It's another name for a ZEIT Addon
+- It's the name given for the installation of a ZEIT Addon
+
+### How to Use an Addon
+
+- Once you create the Addon, you will get a public URL for it such as <https://zeit.co/addon/my-addon>
+- Any ZEIT user can visit that URL and install it on a user or team account
+- Once installed, the Addon gets a set of pages inside <https://zeit.co>
+- When the user accesses the installation page we call the Addon's UiHook
+- UiHooks are only active while the user is viewing the installation (through a short lived token)
+- Addons can use the OAuth authorization flow to get a long lived token as well
+
+Let's build our first ZEIT Addon.
