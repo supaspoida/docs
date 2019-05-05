@@ -29,7 +29,7 @@ const debouncedChangeHash = debounce(changeHash, 200)
 
 class AddonsPage extends Component {
   state = {
-    activeCategory: 'getting-started',
+    activeCategory: 'introduction',
     activeSection: 'introduction',
     activeEntry: null,
     navigationActive: false,

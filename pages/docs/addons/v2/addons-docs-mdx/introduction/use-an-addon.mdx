@@ -1,0 +1,15 @@
+export const meta = {
+  editUrl: 'pages/docs/addons/v2/addons-docs-mdx/introduction/use-an-addon.mdx',
+  lastEdited: '2019-05-05T10:40:29.000Z'
+}
+
+### How to Use an Addon
+
+- Once you create the Addon, you will get a public URL for it such as <https://zeit.co/addon/my-addon>
+- Any ZEIT user can visit that URL and install it on a user or team account
+- Once installed, the Addon gets a set of pages inside <https://zeit.co>
+- When the user accesses the installation page we call the Addon's UiHook
+- UiHooks are only active while the user is viewing the installation (through a short lived token)
+- Addons can use the OAuth authorization flow to get a long lived token as well
+
+Let's build our first ZEIT Addon.
