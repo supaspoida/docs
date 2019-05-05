@@ -1,0 +1,45 @@
+import Note from '~/components/text/note'
+import { TerminalInput } from '~/components/text/terminal'
+import { Code } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+import { Image } from '~/components/media'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/getting-started/create-an-addon.mdx',
+  lastEdited: '2019-05-05T19:12:32.000Z'
+}
+
+## Creating an Addon
+
+Now that the UiHook has been created, we can now create the Addon on ZEIT.
+
+To do this, first login to the [ZEIT dashboard](/dashboard) and **click the Addon link in the main navigation**.
+
+Click "Create New" and you will see a form like the one below:
+
+<Image
+  src={`https://assets.zeit.co/image/upload/v1557065539/docs-assets/static/docs/addons/create-addon-form.png`}
+  width={1670/2}
+  height={1046/2}
+/>
+<Caption>Creating an Addon using the integrations dashboard.</Caption>
+
+Start entering details and at the end of the form, you'll find two fields named as:
+
+- **Redirect URI**
+- **UI Hook URI**
+
+Keep the Redirect URI left blank and add <http://localhost:5005> to the UI Hook URI field.
+
+By doing this, you are setting the local endpoint of the UiHook to make development easier.
+
+### Public Addon URL
+
+Once you create your app, it will be listed in the "My Apps" section. If you visit this section and click on your Addon, you will find its public URL.
+
+The format of the public URL is as follows:
+
+<Code>https://zeit.co/addon/:slug</Code>
+
+The public URL is what you should provide to your customers in order for them to access, install and use your Addon.

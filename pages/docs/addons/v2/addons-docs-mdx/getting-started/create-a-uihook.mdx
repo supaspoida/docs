@@ -1,0 +1,52 @@
+import Note from '~/components/text/note'
+import { TerminalInput } from '~/components/text/terminal'
+import { InlineCode } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/getting-started/create-a-uihook.mdx',
+  lastEdited: '2019-05-05T19:12:32.000Z'
+}
+
+## Creating a UiHook
+
+The UI Hook we will create is a simple counter. It's a good example for understanding how to create your first ZEIT addon.
+
+Create an `index.js` file and add the following code:
+
+```js
+const { withUiHook } = require('@zeit/addons')
+
+let count = 0
+
+module.exports = withUiHook(({ payload }) => {
+  count += 1
+  return `
+ 		<Page>
+ 			<P>Counter: ${count}</P>
+ 			<Button>Count Me</Button>
+        </Page>
+ 	`
+})
+```
+
+<Caption>
+  An example <InlineCode>index.js</InlineCode> file for a ZEIT Addon.
+</Caption>
+
+The code is simple. Inside the UiHook, we increment the count and send JSX response with the current count.
+
+### Running the UiHook Locally
+
+With the [help of `now dev`](/docs/v2/development/basics), you can run your UiHook's locally inside a simulation of the Now platform.
+
+To run the UiHook locally, use the following command:
+
+<TerminalInput>now dev -p 5005</TerminalInput>
+<Caption>Running the created UiHook on port 5005.</Caption>
+
+<Note>
+  You are free those choose any available port or let{' '}
+  <InlineCode>now dev</InlineCode> use the default port.
+</Note>

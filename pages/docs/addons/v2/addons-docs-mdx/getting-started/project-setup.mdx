@@ -1,0 +1,65 @@
+import Note from '~/components/text/note'
+import { TerminalInput } from '~/components/text/terminal'
+import { InlineCode } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/getting-started/project-setup.mdx',
+  lastEdited: '2019-05-05T19:12:32.000Z'
+}
+
+## Project Setup
+
+### Install Node.js and Now CLI
+
+<Note>
+  If you already have the latest stable versions of Node.js and Now CLI. You can
+  skip this process.
+</Note>
+
+- Download and install Node.js
+- Download and install Now Desktop (which comes with Now CLI)
+- Optionally you can install Now CLI via NPM: `npm install -g now`
+
+### Add package.json
+
+To use modules inside the UiHook, we need to create a `package.json` file. Create one with the following content:
+
+```json
+{
+  "name": "my-ui-hook",
+  "dependencies": {
+    "@zeit/addons": "^1.0.0"
+  }
+}
+```
+
+<Caption>
+  An example <InlineCode>package.json</InlineCode> file for a ZEIT Addon.
+</Caption>
+
+Once you have created your `package.json` file, use the follow command to install the dependencies:
+
+<TerminalInput>npm install</TerminalInput>
+<Caption>Installing project dependencies.</Caption>
+
+### Add now.json
+
+Since we will deploy this UiHook to Now, we need to create a `now.json` file to configure the deployment. You can use this as the input when running `now dev` locally.
+
+Create a `now.json` file and add the following content:
+
+```json
+{
+  "name": "my-ui-hook",
+  "version": 2,
+  "builds": [{ "src": "index.js", "use": "@now/node" }]
+}
+```
+
+<Caption>
+  An example <InlineCode>now.json</InlineCode> file for a ZEIT Addon.
+</Caption>
+
+That's all that is required for the initial project setup, next we will create a UiHook.

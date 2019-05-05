@@ -1,0 +1,45 @@
+import Note from '~/components/text/note'
+import { TerminalInput } from '~/components/text/terminal'
+import { Code } from '~/components/text/code'
+import Caption from '~/components/text/caption'
+import { Image } from '~/components/media'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/getting-started/addon-installation.mdx',
+  lastEdited: '2019-05-05T19:12:32.000Z'
+}
+
+## Addon Installation
+
+To install your Addon, users must visit the public URL. From there, users will have the choice of installing it to either their user or team account:
+
+<Image
+  src={`https://assets.zeit.co/image/upload/v1557082934/docs-assets/static/docs/addons/install-addon.png`}
+  width={1670 / 2}
+  height={1046 / 2}
+/>
+<Caption>The installation screen for the Counter Addon.</Caption>
+
+Once installed, the user will be directed back to the installation page, it will look like something like this:
+
+<Image
+  src={`https://assets.zeit.co/image/upload/v1557083002/docs-assets/static/docs/addons/installed-addon.png`}
+  width={1670 / 2}
+  height={1046 / 2}
+/>
+<Caption>The Counter Addon after being installed for the first time.</Caption>
+
+### Installation Location
+
+Once installed, finding the installation is easy. It will be available in the "Installed Addons" section after selecting "Addons" from the main navigation bar.
+
+If you are inside a project, there is a section called "Addons" as well.
+
+Users can switch between these different installation pages via the select box shown on the top right of the installation page.
+
+<Note>
+  When the UiHook receives a request, it contains information related to the
+  project being viewed currently. Based on that, your UiHook can decide what JSX
+  should be sent as response.
+</Note>
