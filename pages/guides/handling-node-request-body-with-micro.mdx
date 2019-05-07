@@ -17,7 +17,7 @@ export const meta = {
   authors: ['msweeneydev'],
   url: '/guides/handling-node-request-body-with-micro',
   editUrl: 'pages/guides/handling-node-request-body-with-micro.mdx',
-  lastEdited: '2019-05-07T00:16:43.000Z'
+  lastEdited: '2019-05-07T00:46:45.000Z'
 }
 
 In this guide, we will show you how to parse a [Node.js request body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/), for use inside a [serverless function](/docs/v2/deployments/concepts/lambdas/), without requiring a framework such as Express.
@@ -71,7 +71,7 @@ To verify that the JSON is being parsed correctly, make a POST request using [cu
     Making a POST request using <GenericLink href="https://curl.haxx.se/">curl</GenericLink>.
 </Caption>
 
-The endpoint contains only the code shown in [step 1](#step-1:-setting-up-the-function) with nothing else added to it. You will receive a response like the following:
+The endpoint contains the code shown in [step 1](#step-1:-setting-up-the-function) deployed using a [`now.json` file](/docs/v2/deployments/configuration/). You will receive a response like the following:
 
 <Code>Hello Reader, you just parsed the request body!</Code>
 <Caption>
@@ -80,7 +80,7 @@ The endpoint contains only the code shown in [step 1](#step-1:-setting-up-the-fu
 
 ## Step 3: Understanding Why this Works
 
-When [Node.js](https://nodejs.org/dist/latest-v12.x/docs/api/) receives a request, the [body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#request-body) is in the format of a [ReadableStream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+When [Node.js](https://nodejs.org/docs/latest-v8.x/api/) receives a request, the [body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#request-body) is in the format of a [ReadableStream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
 
 To get the data from the stream, you need to listen to its `data` and `end` events. To do this requires a few lines of code which you would much rather not have to repeat.
 
@@ -88,7 +88,7 @@ By using [`micro`](https://github.com/zeit/micro), parsing [request bodies](http
 
 ## More Resources
 
-For more information on working with [Now for GitLab](/gitlab), please refer to [the Now for GitLab documentation](/docs/v2/integrations/now-for-gitlab).
+For more information on using Node.js with [Now](/now), take a look at the [`@now/node` builder](/docs/v2/deployments/official-builders/node-js-now-node/).
 
 To configure Now further, please see these additional topics and guides:
 
