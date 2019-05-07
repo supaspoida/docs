@@ -17,16 +17,16 @@ export const meta = {
   authors: ['msweeneydev'],
   url: '/guides/handling-node-request-body-with-micro',
   editUrl: 'pages/guides/handling-node-request-body-with-micro.mdx',
-  lastEdited: '2019-05-02T16:20:42.000Z'
+  lastEdited: '2019-05-07T00:16:43.000Z'
 }
 
 In this guide, we will show you how to parse a [Node.js request body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/), for use inside a [serverless function](/docs/v2/deployments/concepts/lambdas/), without requirinq a framework such as Express.
 
 This guide assumes the request is sent with a [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) of [application/json](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON). However, many more content types can be parsed using the [`micro` module](https://github.com/zeit/micro).
 
-## Step 1: Setting up the Function
+## Step 1: Creating the Function
 
-To illustrate the parsing of the request body, let's take the below function as an example:
+To illustrate the parsing of the request body, let's take the simple function below as an example:
 
 ```js
 const { json } = require('micro')
@@ -44,6 +44,8 @@ module.exports = async (req, res) => {
   </GenericLink>{' '}
   and <GenericLink href="https://github.com/zeit/micro">Micro</GenericLink>.
 </Caption>
+
+This function takes a POST request, parses the body and uses it in the response.
 
 The key part here is line 3, for those used to working with Express, it should be similar to accessing `req.body`.
 
@@ -82,7 +84,7 @@ When [Node.js](https://nodejs.org/dist/latest-v12.x/docs/api/) receives a reques
 
 To get the data from the stream, you need to listen to its `data` and `end` events. To do this requires a few lines of code which you would much rather not have to repeat.
 
-By using [`micro`](https://github.com/zeit/micro), parsing [request bodies](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#request-body) is made concise and straightforward as it handles everything for you, all you need to do is specify the format you want to receive the data in.
+By using [`micro`](https://github.com/zeit/micro), parsing [request bodies](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#request-body) is concise and straightforward as it handles everything for you, all you need to do is specify the format you want to receive the data in.
 
 ## More Resources
 
@@ -109,6 +111,11 @@ To configure Now further, please see these additional topics and guides:
 <Card title="More Guides" href="/guides">
   See more guides that help you move forward with your projects and automatic
   deployments from Now for GitLab.
+</Card>
+
+<Card title="Support" href="/support">
+  Learn more about our Priority Support and discover how we can help you
+  further.
 </Card>
 
 export default ({ children }) => <Guide meta={meta}>{children}</Guide>
