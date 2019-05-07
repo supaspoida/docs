@@ -49,7 +49,7 @@ This function takes a POST request, parses the body and uses it in the response.
 
 The key part here is line 3, for those used to working with Express, it should be similar to accessing `req.body`.
 
-The `json(req)` function returns the request body in the JSON format, fully parsed and ready to work with.
+`json`, imported from micro on line 1, is a function that returns the request body in the JSON format, fully parsed and ready to access through your function as you would with any object.
 
 This is illustrated in the response, as we access the JSON object to use the `name` property that was sent in the initial request.
 
