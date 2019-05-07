@@ -1,0 +1,51 @@
+import Note from '~/components/text/note'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/component-catalog/action-components.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## Action Components
+
+These components create a new UiHook request with an action that forms part of the component.
+
+### Button
+
+This is a key part of your UiHook. When the user clicks the button, we call your UiHook with the action attached to the button.
+
+```jsx
+<Button action="create-db">Create Database</Button>
+```
+
+The Button component supports the following props:
+
+- `small`
+- `disabled`
+- `width`
+
+### AutoRefresh
+
+This can be use to refresh the UI by loading the UiHook again. This is useful when waiting for a background task to finish processing.
+
+In this case, the action is always `view`:
+
+```jsx
+<AutoRefresh timeout="<timeout-in-millis>" />
+```
+
+<Note>Timeouts must be greater than 3 seconds.</Note>
+
+### Link
+
+You can link to an external URL. We always add `target="_blank"`:
+
+```jsx
+<Link href="https://zeit.co">Visit ZEIT</Link>
+```
+
+Or you can use an action instead:
+
+```jsx
+<Link action="doSomething">Do Something</Link>
+```

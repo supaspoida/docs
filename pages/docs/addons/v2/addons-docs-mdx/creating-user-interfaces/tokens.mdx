@@ -1,0 +1,30 @@
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/creating-user-interfaces/tokens.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## Tokens
+
+Every request to a UiHook will receive a token where it can talk to the ZEIT API for the related account.
+
+This is a short-lived token. Therefore, you should only use it inside a the UiHook. You **should not use it** inside async task which are executed even after you return the UiHook response.
+
+If you need a long-lived token, you can ask for a [OAuth2 token](https://www.notion.so/zeithq/Building-OAuth-Apps-2ff4b3638269466e87e2b1c68337eeb1).
+
+You can access this property inside `payload.token`.
+
+When you use the `@zeit/addons` utility, you do not need to extract this token manually. You will receive an instance called `zeitClient` which is initialized with the above token and account information. You can use that to consume the ZEIT token.
+
+This is how you can get that instance:
+
+```js
+const { withUiHook } = require('@zeit/addons')
+
+module.exports = withUiHook(({ payload, zeitClient }) => {
+  // Do something with the zeitClient and payload
+  return `<Page>and return some JSX.</Page>`
+})
+```
+
+You can inspect the [API and methods of `zeitClient`](https://github.com/zeit/addons/blob/master/src/zeit-client.ts) to understand its capabilities.

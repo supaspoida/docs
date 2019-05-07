@@ -1,0 +1,101 @@
+import Note from '~/components/text/note'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/component-catalog/ui-components.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## UI Components
+
+The following UI components are very similar to those found in HTML5, the main different being we're providing the initial styling.
+
+### Box
+
+The Box component is a `div` that accepts style props:
+
+```jsx
+<Box display="flex" justifyContent="space-between">
+  <H1>Your Databases</H1>
+  <Button>+Create New</Button>
+</Box>
+```
+
+### P
+
+```jsx
+<P>A paragraph.</P>
+```
+
+### H1
+
+```jsx
+<H1>The Title</H1>
+```
+
+### H2
+
+```jsx
+<H2>The Secondary Title</H2>
+```
+
+### BR
+
+```jsx
+<BR />
+```
+
+### B
+
+```jsx
+<B>Some Bold Text</B>
+```
+
+### Img
+
+```jsx
+<Img src="url-to-image" />
+```
+
+The Img component supports the following props:
+
+- `title`
+- `width`
+- `height`
+
+### Code
+
+```jsx
+<Code value="${encodeURIComponent('const a = "Arunoda"; <Code/>')}" />
+```
+
+You should provide the value prop with a string encoded with `encodeURIComponent`.
+
+### Fieldset
+
+The Fieldset component allows you to group different sections in your UI.
+
+```jsx
+<Fieldset>
+ 	<FsContent>
+    <H2>This is the Title</H2>
+ 		<P>This is some content.<P>
+  <FsContent>
+  <FsFooter>
+		<P>This is the footer.</P>
+  <FsFooter>
+</Fieldset>
+```
+
+### Notice
+
+```jsx
+<Notice type="error">This is an error messgae.</Notice>
+```
+
+The Notice component supports the following types:
+
+- `error`
+- `warn`
+- `message`
+- `success`

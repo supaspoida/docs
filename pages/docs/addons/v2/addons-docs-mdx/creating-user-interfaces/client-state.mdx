@@ -1,0 +1,29 @@
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/creating-user-interfaces/client-state.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## Client State
+
+Just like actions, you need to be able to accept multiple different inputs from the user. This might include text boxes, password prompts, select boxes - there are many options available.
+
+This is how we can define a simple input box:
+
+```jsx
+<Input name="username" value="my username" />
+```
+
+Now the user can enter a value into this input.
+
+When the user clicks on an action, we combine all of these inputs together into an object called `clientState`. For this example, it would look like this:
+
+```json
+{
+  "username": "my username"
+}
+```
+
+Inside the UiHook you can access this object via `payload.clientState`.
+
+You can discover all supported input components in the [component catalog](https://www.notion.so/zeithq/Available-Components-90262f73b6d84f208bdde5c21f296c4a#1ba2bd9d26654a89b5a73fb2080a215b).

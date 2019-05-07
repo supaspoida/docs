@@ -1,0 +1,26 @@
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/creating-user-interfaces/actions.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## Actions
+
+In a user interface, we usually expose multiple different actions. In the example we looked at earlier there are two actions:
+
+```jsx
+<Container>
+  <Button action="submit">Submit</Button>
+  <Button action="reset">Reset</Button>
+</Container>
+```
+
+These actions are exposed as buttons, in this case `submit` and `reset`.
+
+When a user clicks a button, we send a request to the UiHook with the action. Then UiHook will then send a response consisting of JSX components. We then render that on the screen.
+
+The default action is `view`. You can access the action from the `payload.action` property.
+
+For a better understanding of how actions work, take a look at the [Counter example](/docs/addons#examples/counter) discussed earlier in the documentation.
+
+You can discover all supported action components in the [component catalog](https://www.notion.so/zeithq/Available-Components-90262f73b6d84f208bdde5c21f296c4a#3a8e6e65bb6e4ebd87f56b9fcca55813).

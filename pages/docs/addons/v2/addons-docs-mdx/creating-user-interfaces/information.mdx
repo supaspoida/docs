@@ -1,0 +1,25 @@
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/creating-user-interfaces/information.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## Information
+
+### Project Information
+
+Inside the ZEIT dashboard, a user can access the Addon installation inside either:
+
+- The team or user dashboard
+- Each and every project
+
+A UiHook can identify this by looking at the `payload.projectId` property. It can then change the user interface selectively.
+
+If the user is looking at the installation inside the main dashboard, `payload.projectId` will be empty.
+
+### Account Information
+
+You can access the account information of the installation inside the UiHook. Here's a list of such properties:
+
+- `payload.userId` - The `userId` who is accessing the UiHook
+- `payload.teamId` - The `teamId` of the installation if the Addon is installed for a team, otherwise empty

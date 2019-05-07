@@ -1,0 +1,22 @@
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/creating-user-interfaces/jsx.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+## JSX
+
+This is not a field in the payload, but what you should return as the response from a UiHook, a set of whitelisted JSX components. These components will be parsed and rendered in the ZEIT dashboard.
+
+For security reasons, these JSX components have some minor limitations:
+
+- No HTML elements are allowed
+- Script and Style tags are not supported
+- JavaScript support is disabled inside the JSX components
+- Only a set of whitelisted components are supported
+
+These limitations may seem restrictive, but with very good reason.
+
+These limitations allow us to expose a way for you to introduce UI elements into the ZEIT dashboard without requiring manual verification.
+
+We also provide a set of [rich components](https://www.notion.so/zeithq/Available-Components-90262f73b6d84f208bdde5c21f296c4a) that allow you to receive user inputs, implement styling and poll for changes.
