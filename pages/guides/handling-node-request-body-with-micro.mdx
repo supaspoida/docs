@@ -20,13 +20,13 @@ export const meta = {
   lastEdited: '2019-05-07T00:16:43.000Z'
 }
 
-In this guide, we will show you how to parse a [Node.js request body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/), for use inside a [serverless function](/docs/v2/deployments/concepts/lambdas/), without requirinq a framework such as Express.
+In this guide, we will show you how to parse a [Node.js request body](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/), for use inside a [serverless function](/docs/v2/deployments/concepts/lambdas/), without requiring a framework such as Express.
 
-This guide assumes the request is sent with a [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) of [application/json](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON). However, many more content types can be parsed using the [`micro` module](https://github.com/zeit/micro).
+This guide assumes the request is sent with a [`Content-Type`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) of [`application/json`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON). However, many more content types can be parsed using the [`micro` module](https://github.com/zeit/micro).
 
 ## Step 1: Creating the Function
 
-To illustrate the parsing of the request body, let's take the simple function below as an example:
+To illustrate the parsing of a request body, let's take the simple function below as an example:
 
 ```js
 const { json } = require('micro')
@@ -45,9 +45,9 @@ module.exports = async (req, res) => {
   and <GenericLink href="https://github.com/zeit/micro">Micro</GenericLink>.
 </Caption>
 
-This function takes a POST request, parses the body and uses it in the response.
+This function takes a POST request, parses the body, and uses data from the body in the response.
 
-The key part here is line 3, for those used to working with Express, it should be similar to accessing `req.body`.
+The key part here is line 4. For those used to working with Express, it should be similar to accessing `req.body`.
 
 `json`, imported from micro on line 1, is a function that returns the request body in the JSON format, fully parsed and ready to access through your function as you would with any object.
 
