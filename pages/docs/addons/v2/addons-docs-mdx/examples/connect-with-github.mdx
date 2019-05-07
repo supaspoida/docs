@@ -1,0 +1,21 @@
+import Caption from '~/components/text/caption'
+import { Image } from '~/components/media'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/examples/connect-with-github.mdx',
+  lastEdited: '2019-05-07T15:48:18.000Z'
+}
+
+## Connect with GitHub
+
+This Addon uses GitHub OAuth support to connect a user to an Addon and receive details about the connected user. You can use the same process for other providers who supports OAuth.
+
+Taking a look at the [code on GitHub](https://github.com/zeit/addons-galary/tree/master/connect-with-github) will help you understand how to build Addons that connect to GitHub using the UiHook.
+
+<Image
+  src={`https://assets.zeit.co/image/upload/v1557243575/docs-assets/static/docs/addons/connect-with-github.png`}
+  width={1670/2}
+  height={1046/2}
+/>
+<Caption>Creating an Addon that connects to GitHub using the integrations dashboard.</Caption>
