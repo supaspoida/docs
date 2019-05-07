@@ -1,0 +1,26 @@
+import Counter from './counter.mdx'
+import BasicForm from './basic-form.mdx'
+import UsingMetadata from './using-metadata.mdx'
+import MongoDbAtlas from './mongo-db-atlas.mdx'
+
+export const meta = {
+  editUrl: 'pages/docs/addons/v2/addons-docs-mdx/examples/examples.mdx',
+  lastEdited: '2019-05-07T12:30:46.000Z'
+}
+
+# Examples
+
+With the previous [getting started](/docs/addons/#getting-started) section, you should now have a clear idea of how to create a simple Addon. In this section, let's look at a few more examples and see what more you can do with the ZEIT Addons API.
+
+All of these examples contain a README showing how to run them locally, however most of them follow the below process:
+
+- Create an Addon using the ZEIT dashboard
+- Set the UiHook URI to <http://localhost:5005>
+- Install the Addon
+- Run the Addon's UiHook locally with `now dev -p 5005`
+- Access the Addon installation from the ZEIT dashboard
+
+<Counter />
+<BasicForm />
+<UsingMetadata />
+<MongoDbAtlas />
