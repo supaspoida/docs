@@ -1,0 +1,102 @@
+import Endpoint from '~/components/api/endpoint'
+import Request from '~/components/api/request'
+import Note from '~/components/text/note'
+import { Image } from '~/components/media'
+import Caption from '~/components/text/caption'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/project-level-apis/project-level-apis.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+# Project Level APIs
+
+Deployments made with ZEIT Now are grouped into Projects. This means that each deployment is assigned a name and is grouped into a project with other deployments using that same name.
+
+Users can deploy projects for any type of app. For example, there could be:
+
+- A project for a marketing website.
+- A project for a backend API.
+- A project for an admin dashboard.
+- A project with all three in a monorepo.
+
+Using a ZEIT addon, you can modify configuration for whole projectsm, for which we expose a few API endpoints:
+
+## Project-Based Environment Variables
+
+When building a ZEIT addon, you may want to expose an API secret or a configuration URL for deployments within a project.
+
+For an example, say you want to expose the `MONGO_URL` environment variable; the following would be the process to do so:
+
+- Create a secret to store the value for `MONGO_URL` (This is an account wide operation). For this example, we'll assume the value for the secret key is `mongo_url_for_my_db`.
+- Next, add `MONGO_URL=@mongo_url_for_my_db` for the projects where `MONGO_URL` is needed.
+
+<Note>
+  The pattern is to create a secret once per account then use it many times with
+  different projects.
+</Note>
+
+### Utilities inside @zeit/addons
+
+If you are using `@zeit/addons` to create your [UiHook](#getting-started/creating-a-uihook), the following is how to use utilities within your addon:
+
+```js
+const { withUiHook } = require('@zeit/addons')
+
+module.exports = withUiHook(async ({ payload, zeitClient }) => {
+  if (payload.action === 'add-env') {
+    const mongo_url = 'this is your mongo url'
+    const secretName = await zeitClient.ensureSecret('mongo_url', mongo_url)
+    await zeitClient.addEnv(payload.projectId, 'MONGO_URL', secretName)
+
+    return `
+      <Page>
+        Enviornment variable added.
+        <Button small action="view">Go Back</Button>
+      </Page>
+    `
+  }
+
+  return `
+    <Page>
+      <Button action="add-env">Add Env</Button>
+    </Page>
+  `
+})
+```
+
+Based on the example above:
+
+- `zeitClient.ensureSecret` will create a unique ZEIT secret based on the hash value of `mongo_url`, then returns the name of secret.
+- If the secret already exists, it will not be duplicated for the given value.
+- The value of `secretName` will be, for example; `mongo_url_s2kj23jh55`.
+- The secret is added to the project (using `payload.projectId`) through the `zeitClient.addEnv` method.
+
+Some considerations when using `zeitClient.addEnv`:
+
+- In order to add a project level environment variable, there should be a `projectId`.
+- You can get the projectId from the `payload` object if the user is accessing the addon installation from within a project.
+- Otherwise, if the user is inside a team view, you can hide the `Add Env` button or ask the user to switch to accessing the addon from within a project.
+
+<Image
+  src={`${process.env.ASSETS}/docs/addons/project-level-apis/select-view.png`}
+  width={1448/2}
+  height={614/2}
+/>
+<Caption>Switching the view.</Caption>
+
+### Using the API directly
+
+If you are not using `@zeit/addons` utility, you can use the ZEIT API directly. See the following API reference documentation for how to utilize it:
+
+- [Creating and Using Secrets](/docs/api/#endpoints/secrets)
+- [Adding a New Environment Variable to a Project](/docs/api/#endpoints/projects/create-project-environment-variables)
+
+## Default Region for a Project
+
+This is yet to be done.
+
+## Default Routes
+
+This is yet to be done.
