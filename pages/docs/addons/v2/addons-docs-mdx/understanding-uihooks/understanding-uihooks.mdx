@@ -1,0 +1,113 @@
+import Endpoint from '~/components/api/endpoint'
+import Request from '~/components/api/request'
+import Note from '~/components/text/note'
+import { Image } from '~/components/media'
+import Caption from '~/components/text/caption'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/understanding-uihooks/understanding-uihooks.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+# Understanding UiHooks
+
+A UiHook is the main component of a ZEIT addon. In [the Getting Started section](#getting-started), we used a utility from the `@zeit/addons` module to [create a UiHook](#getting-started/creating-a-uihook).
+
+The module we used is only available when using Node.js to build the UiHook, but a UiHook can be created using any programming language or framework.
+
+## Terminology
+
+There are some very specific terms used in relation to UiHooks, those being:
+
+- "Addon": This is an addon created using the ZEIT dashboard. This is the what a user installs.
+- "Installation": A single instance where a user installed an addon to an account (user or a team).
+- "UiHook": An Addon can render UI elements. These UI elements are requested from a HTTP endpoint defined in the Addon's implementation. The HTTP endpoint is called a UiHook.
+
+## UiHooks are HTTP-Based
+
+UiHooks are HTTP based, so it's not tied to any programming language or framework.
+
+The process a UiHook uses is as follows:
+
+- UiHook is receives a HTTP POST request, including a JSON payload as the HTTP POST body.
+- The UiHook returns a JSX component string as the response.
+- A UiHook can be called via client side, so it needs to support CORS.
+
+The following example shows how you can implement a UiHook with Node.js and [`micro`](https://www.npmjs.com/package/micro).
+
+<Note>
+  This implementation is very similar to implementations in other languages.
+</Note>
+
+```js
+const micro = require('micro')
+
+let counter = 0
+
+async function uiHook(req, res) {
+  // Add CORS support. So UiHook can be called via client side.
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Authorization, Accept, Content-Type'
+  )
+
+  if (req.method === 'OPTIONS') {
+    return micro.send(res, 200)
+  }
+
+  // UiHook works only with HTTP POST.
+  if (req.method !== 'POST') {
+    return micro.send(res, 404, '404 - Not Found')
+  }
+
+  // Extract payload from the POST body.
+  const payload = await micro.json(req)
+  if (payload.action === 'reset') {
+    counter = 0
+  } else {
+    counter += 1
+  }
+
+  // Send JSX components as the response
+  return micro.send(
+    res,
+    200,
+    `
+    <Page>
+      <P>Counter: ${counter}</P>
+      <Button>Count Me</Button>
+      <Button action="reset">Reset</Button>
+    </Page>
+  `
+  )
+}
+
+// Start the HTTP server
+const server = micro(uiHook)
+const port = process.env.PORT || 5005
+
+console.log(`UiHook started on http://localhost:${port}`)
+server.listen(port, err => {
+  if (err) {
+    throw err
+  }
+})
+```
+
+For more examples of Addon implementation including the above example and others in more languages, such as PHP, Python, Go and Rust, [see the Addon Gallery repository](https://github.com/zeit/addons-gallery/tree/master/counter-micro).
+
+## HTTP Payload
+
+The payload used in the UiHook receives a JSON payload with different peices of information regarding the addon installation, those being:
+
+- `slug` - The slug of the addon that sent the request.
+- `action` - The [action](#creating-user-interfaces/actions) of the UiHook (defaults to `view`).
+- `clientState` - An object containing the [values](#creating-user-interfaces/client-state) of input components.
+- `teamId` - The `teamId` if the addon is installed to a team.
+- `projectId` - The [`projectId`](#creating-user-interfaces/information/project-information) if the addon installation is inside a project. (This will be `null` if the addon installation is from within an account and not a project).
+- `token` - A short-lived [token](#creating-user-interfaces/tokens) which has authorization for the installed account.
+- `installationUrl` - The URL of the current addon installation. (You can use this to redirect a user to another site using `installationUrl` as the redirect URL)
+- `query` - An object containing query parameters of the addon installation page.

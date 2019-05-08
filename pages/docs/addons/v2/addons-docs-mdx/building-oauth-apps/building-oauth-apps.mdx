@@ -1,0 +1,13 @@
+# Building OAuth Apps
+
+The main purpose of ZEIT addons is to introduce new capabilities inside of users dashboards on ZEIT. This capability is expanded by UiHooks.
+
+However, you may need to integrate ZEIT with your own application. You might also need implement Single-Sign-On with ZEIT.
+
+### OAuth2
+
+Every ZEIT Addon is a full-fledged OAuth2 app. When you create an add-on, or after doing so, you have an option to add a OAuth redirect URL.
+
+Inside your Addon, you can access OAuth2 credentials (`clientId` and `clientSecret`). You can use this information to connect your app with ZEIT.
+
+[See our API Reference Documentation](https://zeit.co/docs/api#endpoints/oauth2) for more about OAuth2 support.
