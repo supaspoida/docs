@@ -1,0 +1,87 @@
+import Endpoint from '~/components/api/endpoint'
+import Request from '~/components/api/request'
+import Note from '~/components/text/note'
+
+export const meta = {
+  editUrl:
+    'pages/docs/addons/v2/addons-docs-mdx/using-the-metadata-store/metadata-store.mdx',
+  lastEdited: '2019-05-07T20:42:45.000Z'
+}
+
+# Using the Metadata Store
+
+When installing an addon, most of the time the user needs the addon to persist different configurations and information.
+
+This may include:
+
+- User preferences
+- Different API secrets/tokens
+- Cached results for faster access
+
+Usually, a database is used to keep these pieces of infromation, but for ZEIT Addons, we provide a Metadata Store for this very purpose.
+
+Every [UiHook](#getting-started/creating-a-uihook) has access to a metadata store.
+
+Each addon installation has a unique store for metadata, limited to 100KB in size.
+
+The store is not a database but a configuration store.
+
+This is something the addon might load in every request so forcing the metadata to be small, the addon's performance and load time will not be affected.
+
+## Access via @zeit/addons
+
+If you use the `@zeit/addons` helper to [create the UiHook](#getting-started/creating-a-uihook), you can access the metadata store via the `zeitClient` instance, for example:
+
+```js
+const { withUiHook } = require('@zeit/addons')
+
+module.exports = withUiHook(async ({ payload, zeitClient }) => {
+  // Get metadata
+  const metadata = await zeitClient.getMetadata()
+  metadata.count = metadata.count || 0
+  metadata.count += 1
+
+  // Save metadata
+  await zeitClient.saveMetadata(metadata)
+
+  return `
+    <Page>
+    <P>Counter: ${metadata.count}</P>
+      <Button>Count Me</Button>
+    </Page>
+  `
+})
+```
+
+## API
+
+The following API endpoints can also be used to store metadata.
+
+### Get Metadata
+
+<Endpoint
+  method="GET"
+  url="https://api.zeit.co/v1/integrations/installation/:slug/metadata"
+/>
+
+We need to use necessary authenticate information. (Like token, teamId)
+
+### Set Metadata
+
+<Endpoint
+  method="POST"
+  url="https://api.zeit.co/v1/integrations/installation/:slug/metadata"
+/>
+
+This endpoint, using the POST method and a JSON body, sets metadata for a [UiHook](#getting-started/creating-a-uihook).
+
+The body to submit with the POST request should contain a valid JSON object containing metadata. The following is an example request using JS:
+
+<Request
+  type="js"
+  url="https://api.zeit.co/v1/integrations/installation/:slug/metadata"
+  method="POST"
+  body={{
+    mydata: 'a value for mydata'
+  }}
+/>
